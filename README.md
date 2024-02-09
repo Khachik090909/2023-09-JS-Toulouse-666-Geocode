@@ -1,74 +1,40 @@
-# Geocode #
+# Geocode
 
-### Windows users
+Cette application permet aux utilisateurs de voitures électriques de trouver une borne de rechargement sur une carte interactive, ainsi que de réserver lesdites bornes. Elle a été développée dans le cadre d'un projet réalisé à la Wild Code School par Khachik Sahakyan, Marcelo Romero et Quentin Vayssières.
 
-Be sure to run these commands in a git terminal to avoid [issues with newline formats](https://en.wikipedia.org/wiki/Newline#Issues_with_different_newline_formats):
+## Technologies Utilisées
 
-```
-git config --global core.eol lf
-git config --global core.autocrlf false
-```
+- **React**: Utilisé pour la partie front-end de l'application, offrant une interface utilisateur interactive et réactive.
+- **Express**: Utilisé pour le développement du serveur back-end, permettant de gérer les requêtes des utilisateurs et de communiquer avec la base de données.
+- **MySQL**: Base de données relationnelle utilisée pour stocker les informations sur les bornes de recharge et les réservations.
+- **Template JS FullStack de la Wild Code School**: Utilisé comme point de départ pour la structure du projet et l'organisation des fichiers.
 
-### Project Initialization
+## Installation
 
-- In VSCode, install plugins **Prettier - Code formatter** and **ESLint** and configure them
-- Clone this repo, enter it
-- Run command `npm install`
-- Create environment files (`.env`) in both `backend` and `frontend`: you can copy `.env.sample` files as starters (**don't** delete them)
+1. Cloner ce dépôt sur votre machine locale.
+2. Assurez-vous d'avoir Node.js et npm installés sur votre machine.
+3. Installez les dépendances front-end en exécutant `npm install` dans le répertoire du client.
+4. Installez les dépendances back-end en exécutant `npm install` dans le répertoire du serveur.
+5. Configurez votre base de données MySQL et assurez-vous que les informations de connexion sont correctement spécifiées dans le fichier `.env`.
 
-### Available Commands
+## Utilisation
 
-- `db:migrate` : Run the database migration script
-- `db:seed` : Run the database seed script
-- `dev` : Starts both servers (frontend + backend) in one terminal
-- `dev-front` : Starts the React frontend server
-- `dev-back` : Starts the Express backend server
-- `lint` : Runs validation tools (will be executed on every _commit_, and refuse unclean code)
+1. Pour lancer le serveur de développement, assurez-vous d'être à la racine du projet et exécutez le script suivant : 
+   `
+   npm run dev
+   `
+2. Accédez à l'application dans votre navigateur à l'adresse `http://localhost:3000`.
 
-## FAQ
+## Contribuer
 
-### Tools
+Les contributions sont les bienvenues ! Si vous souhaitez contribuer à ce projet, veuillez créer une nouvelle branche à partir de `main` et soumettre une demande de tirage avec vos modifications.
 
-- _Concurrently_ : Allows for several commands to run concurrently in the same CLI
-- _Husky_ : Allows to execute specific commands that trigger on _git_ events
-- _Vite_ : Alternative to _Create-React-App_, packaging less tools for a more fluid experience
-- _ESLint_ : "Quality of code" tool, ensures chosen rules will be enforced
-- _Prettier_ : "Quality of code" tool as well, focuses on the styleguide
-- _ Airbnb Standard_ : One of the most known "standards", even though it's not officially linked to ES/JS
+## Auteurs
 
-## Deployment with Traefik
+- Khachik Sahakyan
+- Marcelo Romero
+- Quentin Vayssières
 
-> ⚠️ Prerequisites : You must have installed and configured Traefik on your VPS beforehand.
-> https://github.com/WildCodeSchool/vps-traefik-starter-kit/
+## Licence
 
-For deployment, you have to go to `secrets` → app `actions` on the github repo to insert via `New repository secret` :
-
-- SSH_HOST : IP address of your VPS
-- SSH_USER : SSH login to your VPS
-- SSH_PASSWORD : SSH connection password to your VPS
-
-And a public variable from the tab `/settings/variables/actions` :
-
-- PROJECT_NAME : the name of the project used to create the subdomain.
-
-> ⚠️ Warning : underscores are not allowed. They can cause trouble with the let's encrypt certificate
-
-Use this same tab to add the other environment variables required for the project if any.
-
-Only the backend will be accessible. The root path `"/"` will redirect to the dist folder on your frontend. In order to allow that, please uncomment the line as explain on `backend/src/app.js` (Line 102).
-Because the backend will serve the front, the global variable VITE_BACKEND_URL will be set with an empty string.
-
-Your url will be ` https://${PROJECT-NAME}.${subdomain}.wilders.dev/`.
-
-### About the database
-
-The database is automaticaly deployed with the name of your repo. During the build of the projet (`docker-entry.sh`), the `node migrate.js` command is executed in the backend. If you want to seed automaticaly your database using the `seed.js` script, replace the command _build_ on you `backend/package.json` by `node migrate.js && node seed.js`.
-
-### About public assets (pictures, fonts...)
-
-Don't use any public folder on your frontend. This folder won't be accessible online. You may move your public assets in the `backend/public` folder. Prefer [static assets](https://vitejs.dev/guide/assets) when possible.
-
-### About Logs
-
-If you want to access the logs of your online projet (to follow the deployement or to watch any bug error), connect to your VPS (`ssh user@host`).
-Then, go on your specific project and run  `docker compose logs -t -f`.
+Ce projet est sous licence MIT. Consultez le fichier LICENSE pour plus d'informations.
